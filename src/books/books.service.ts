@@ -6,22 +6,35 @@ export class BooksService {
   private booksDataBase: Book[] = [];
 
   public create(book: Book) {
-    return 'This action adds a new book';
+    this.booksDataBase.push(book);
+
+    return this.booksDataBase.filter((item) => item.id === book.id);
   }
 
   public findAll() {
-    return `This action returns all books`;
+    return this.booksDataBase;
   }
 
   public findOne(id: number) {
-    return `This action returns a #${id} book`;
+    return this.booksDataBase.filter((item) => item.id === id);
   }
 
   public update(id: number, book: Book) {
-    return `This action updates a #${id} book`;
+    this.booksDataBase = this.booksDataBase.map((item) => {
+      if (item.id === id) {
+        return book;
+      }
+      return item;
+    });
+    return this.booksDataBase.filter((item) => item.id === id);
   }
 
   public remove(id: number) {
-    return `This action removes a #${id} book`;
+    const index = this.booksDataBase.findIndex((item) => item.id === id);
+    if (index !== -1) {
+      this.booksDataBase.splice(index, 1);
+      return true;
+    }
+    return false;
   }
 }
