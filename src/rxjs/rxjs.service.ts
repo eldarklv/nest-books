@@ -1,16 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
-import {
-  Observable,
-  concat,
-  firstValueFrom,
-  forkJoin,
-  from,
-  map,
-  mergeAll,
-  take,
-  toArray,
-} from 'rxjs';
+import { Observable, forkJoin, from, map, mergeAll, take, toArray } from 'rxjs';
 
 @Injectable()
 export class RxjsService {
