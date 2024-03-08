@@ -1,40 +1,45 @@
 import { Injectable } from '@nestjs/common';
-import { Book } from './dto/book.dto';
+import { BookDto } from './dto/book.dto';
+import { InjectConnection, InjectModel } from '@nestjs/mongoose';
+import { Book } from './schemas/book.schema';
+import { Connection, Model } from 'mongoose';
 
 @Injectable()
 export class BooksService {
-  private booksDataBase: Book[] = [];
+  constructor(
+    @InjectModel(Book.name) private bookModel: Model<Book>,
+    @InjectConnection() private connection: Connection,
+  ) {}
 
-  public create(book: Book) {
-    this.booksDataBase.push(book);
+  public create(book: BookDto) {
+    const newBook = new this.bookModel(book);
 
-    return this.booksDataBase.filter((item) => item.id === book.id);
+    return newBook.save();
   }
 
   public findAll() {
-    return this.booksDataBase;
+    const allBooks = this.bookModel.find({});
+
+    return allBooks;
   }
 
-  public findOne(id: number) {
-    return this.booksDataBase.filter((item) => item.id === id);
+  public findOne(id: string) {
+    const bookById = this.bookModel.findById(id);
+
+    return bookById;
   }
 
-  public update(id: number, book: Book) {
-    this.booksDataBase = this.booksDataBase.map((item) => {
-      if (item.id === id) {
-        return book;
-      }
-      return item;
+  public update(id: string, book: BookDto) {
+    const updatedBook = this.bookModel.findByIdAndUpdate(id, book, {
+      new: true,
     });
-    return this.booksDataBase.filter((item) => item.id === id);
+
+    return updatedBook;
   }
 
-  public remove(id: number) {
-    const index = this.booksDataBase.findIndex((item) => item.id === id);
-    if (index !== -1) {
-      this.booksDataBase.splice(index, 1);
-      return true;
-    }
-    return false;
+  public remove(id: string) {
+    const deletedBook = this.bookModel.findByIdAndDelete(id);
+
+    return deletedBook;
   }
 }
