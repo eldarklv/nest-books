@@ -19,7 +19,10 @@ export class ExtendBody implements NestInterceptor {
       }),
       catchError((error) => {
         const response = context.switchToHttp().getResponse();
-        const status = error.getStatus();
+        let status = 500;
+        // проверка на дурака, тут бывали ошибки
+        if (error.getStatus) status = error.getStatus();
+
         response.status(status);
 
         return of({

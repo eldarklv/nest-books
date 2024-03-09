@@ -1,6 +1,15 @@
-import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  UsePipes,
+} from '@nestjs/common';
 import { BooksService } from './books.service';
 import { BookDto } from './dto/book.dto';
+import { ValidateObjectIdPipe } from 'src/pipes/objectId.pipe';
 
 @Controller('books')
 export class BooksController {
@@ -17,17 +26,17 @@ export class BooksController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id', ValidateObjectIdPipe) id: string) {
     return this.booksService.findOne(id);
   }
 
   @Post(':id')
-  update(@Param('id') id: string, @Body() book: BookDto) {
+  update(@Param('id', ValidateObjectIdPipe) id: string, @Body() book: BookDto) {
     return this.booksService.update(id, book);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ValidateObjectIdPipe) id: string) {
     return this.booksService.remove(id);
   }
 }
