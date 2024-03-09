@@ -5,7 +5,7 @@ import { HttpExceptionFilter } from './exceptionFilter/http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  // Выключил Interceptor, т.к. он конфликтует useGlobalInterceptors с HttpExceptionFilter
+  // Выключил Interceptor, т.к. он конфликтует с HttpExceptionFilter
   // У них примерно одинаковая логика
   // app.useGlobalInterceptors(new ExtendBody());
   app.useGlobalFilters(new HttpExceptionFilter());
