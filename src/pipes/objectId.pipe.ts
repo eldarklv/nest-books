@@ -8,6 +8,7 @@ import { isValidObjectId } from 'mongoose';
 
 @Injectable()
 export class ValidateObjectIdPipe implements PipeTransform {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   transform(objectId: any, metadata: ArgumentMetadata) {
     if (isValidObjectId(objectId)) {
       return objectId;

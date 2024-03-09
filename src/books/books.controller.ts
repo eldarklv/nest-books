@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  Delete,
-  UsePipes,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { BookDto } from './dto/book.dto';
 import { ValidateObjectIdPipe } from 'src/pipes/objectId.pipe';
