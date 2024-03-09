@@ -1,6 +1,7 @@
 import { IsNotEmpty, IsBoolean, IsString } from 'class-validator';
 
 export class BookDto {
+  @IsNotEmpty()
   @IsString()
   title: string;
 
@@ -13,6 +14,5 @@ export class BookDto {
   authors: string;
 
   @IsBoolean()
-  @IsString()
   favorite: boolean | null | undefined;
 }

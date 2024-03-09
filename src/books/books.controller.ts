@@ -24,6 +24,7 @@ export class BooksController {
 
   @Get()
   findAll() {
+    // throw new BadRequestException();
     return this.booksService.findAll();
   }
 
