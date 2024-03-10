@@ -5,7 +5,7 @@ import { User } from './schemas/user.schema';
 import { Connection, Model } from 'mongoose';
 
 @Injectable()
-export class UsersService {
+export class UserService {
   constructor(
     @InjectModel(User.name) private userModel: Model<User>,
     @InjectConnection() private connection: Connection,
@@ -16,13 +16,8 @@ export class UsersService {
     return createdUser.save();
   }
 
-  async findAll(): Promise<User[]> {
-    const allUsers = this.userModel.find({});
-    return allUsers;
-  }
-
-  async findOne(id: string): Promise<User> {
-    const userById = this.userModel.findById(id);
-    return userById;
+  async findByEmail(email: string): Promise<User> {
+    const userByEmail = this.userModel.findOne({ email: email }).lean().exec();
+    return userByEmail;
   }
 }
