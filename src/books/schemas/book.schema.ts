@@ -15,7 +15,7 @@ export class Book {
   public authors: string;
 
   @Prop()
-  public favorite: string;
+  public favorite: boolean;
 }
 
 export const BookSchema = SchemaFactory.createForClass(Book);
