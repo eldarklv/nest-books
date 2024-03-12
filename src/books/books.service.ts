@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { BookDto } from './dto/book.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Book } from './schemas/book.schema';
@@ -20,8 +20,12 @@ export class BooksService {
     return allBooks;
   }
 
-  public findOne(id: string) {
-    const bookById = this.bookModel.findById(id);
+  public async findOne(id: string) {
+    const bookById = await this.bookModel.findById(id);
+
+    if (!bookById) {
+      throw new HttpException('Book not found', HttpStatus.NOT_FOUND);
+    }
 
     return bookById;
   }

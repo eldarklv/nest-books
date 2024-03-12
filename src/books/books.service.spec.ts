@@ -3,7 +3,7 @@ import { BooksService } from './books.service';
 import { getModelToken } from '@nestjs/mongoose';
 import { Book } from './schemas/book.schema';
 import { BookDto } from './dto/book.dto';
-import { Model, Types } from 'mongoose';
+import { Model } from 'mongoose';
 
 describe('BooksService', () => {
   let bookService: BooksService;
