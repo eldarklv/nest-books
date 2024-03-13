@@ -8,6 +8,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { RxjsModule } from './rxjs/rxjs.module';
 import { UsersModule } from './users/user.module';
 import { AuthModule } from './auth/auth.module';
+import { CommentsModule } from './comments/comments.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { AuthModule } from './auth/auth.module';
     RxjsModule,
     AuthModule,
     UsersModule,
+    CommentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
