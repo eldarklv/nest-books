@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { BookDto } from './dto/book.dto';
-import { ValidateObjectIdPipe } from 'src/pipes/objectId.pipe';
+import { ValidateObjectIdPipe } from '../pipes/objectId.pipe';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('books')
